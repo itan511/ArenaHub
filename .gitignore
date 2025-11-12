@@ -1,0 +1,73 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+*.log
+*.pot
+*.mo
+*.pyc
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Pytest / coverage
+.cache/
+.coverage
+.tox/
+.nox/
+htmlcov/
+coverage.xml
+pytest_cache/
+
+# IDE & system
+.idea/
+.vscode/
+*.swp
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Local environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# SQLite / PostgreSQL / DB dumps
+*.db
+*.sqlite3
+*.sql
+*.dump
+
+# Frontend build in backend (if copied)
+backend/static/
+backend/templates/
+
+*.orig
+
+__snapshots__/
+tmp/
+temp/
+
