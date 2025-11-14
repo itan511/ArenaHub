@@ -1,4 +1,4 @@
-from data.models.models import Match
+from app.data.models.models import Match
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from app.api.auth import get_current_user

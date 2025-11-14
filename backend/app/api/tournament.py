@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
-from data.models.models import Tournament
+from app.data.models.models import Tournament
 from app.api.auth import get_current_user
 
 router = APIRouter(prefix="/tournaments", tags=["Tournaments"])

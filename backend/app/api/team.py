@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import List
-from data.models.models import Team
+from app.data.models.models import Team
 from app.api.auth import get_current_user
 
 router = APIRouter(prefix="/teams", tags=["Teams"])

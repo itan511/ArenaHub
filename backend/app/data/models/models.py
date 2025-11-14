@@ -29,3 +29,7 @@ class Team(BaseModel):
     country: str
     logo_url: Optional[str] = None
     players: List[int] = []
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str

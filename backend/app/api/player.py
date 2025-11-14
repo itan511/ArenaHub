@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from data.models.models import Player
+from app.data.models.models import Player
 from typing import List
 from app.api.auth import get_current_user
 
