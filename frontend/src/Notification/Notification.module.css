@@ -1,0 +1,19 @@
+.notification {
+  position: absolute;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 1em;
+  padding: 1em 1.5em;
+  opacity: 0;
+  font-size: 1.25rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.notification.visibility {
+  opacity: 1;
+}
+
+.right {
+  top: 2em;
+  right: 2em;
+}

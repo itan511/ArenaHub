@@ -2,21 +2,31 @@ import {Route, Routes} from "react-router-dom";
 import AuthPage from "../Pages/AuthPage";
 import LoginForm from "../Pages/AuthPage/LoginForm/index.js";
 import RegisterForm from "../Pages/AuthPage/RegisterForm/index.js";
+import Notification from "../Notification/Notification.jsx";
+import useNotification from "../hooks/useNotification.js";
 
 export default () => {
-  return (<Routes>
-    <Route
-      path={"/auth/*"}
-      element={<AuthPage />}
-    >
+  const {notification, showNotification} = useNotification();
+  return (<>
+    <Notification
+      isVisible={notification.isVisible}
+      context={notification.text}
+    />
+    <Routes>
+
       <Route
-        path="login"
-        element={<LoginForm />}
-      />
-      <Route
-        path="register"
-        element={<RegisterForm />}
-      />
-    </Route>
-  </Routes>);
+        path={"/auth/*"}
+        element={<AuthPage />}
+      >
+        <Route
+          path="login"
+          element={<LoginForm showNotification={showNotification} />}
+        />
+        <Route
+          path="register"
+          element={<RegisterForm showNotification={showNotification} />}
+        />
+      </Route>
+    </Routes>
+  </>);
 };

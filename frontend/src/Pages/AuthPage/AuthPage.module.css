@@ -36,7 +36,7 @@
 }
 
 .switcher {
-  width: 100%;
+  width: 98%;
   display: flex;
   background-color: var(--dirtyWhite);
   padding: 1%;

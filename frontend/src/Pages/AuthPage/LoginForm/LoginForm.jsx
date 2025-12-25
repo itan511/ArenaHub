@@ -1,11 +1,13 @@
 import style from './LoginForm.module.css';
 import InputField from "../../../components/InputField/index.js";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import Button from "../../../components/Button/index.js";
+import authService from "../../../api/AuthService.js";
 
-export default () => {
-  const [loginForm, setLoginForm] = useState({email: "", password: ""})
+export default ({showNotification}) => {
+  const [loginForm, setLoginForm] = useState({email: "", password: ""});
+  const navigate = useNavigate();
 
   const handleEmailInput = (value) => {
     setLoginForm(prevState => ({...prevState, email: value}));
@@ -15,8 +17,16 @@ export default () => {
     setLoginForm(prevState => ({...prevState, password: value}));
   }
 
-  const login = () => {
-
+  const login = async () => {
+    if (loginForm.email) {
+      if (loginForm.password) {
+        await authService.login({loginForm}).then((r) => r ? navigate("/") : showNotification("Invalid email or password"));
+      } else {
+        showNotification("Password required");
+      }
+    } else {
+      showNotification("Email required");
+    }
   }
 
   return (<>
@@ -33,6 +43,7 @@ export default () => {
       label={"Password"}
       name={"password"}
       placeholder={"Enter your password"}
+      isPassword={true}
     />
     <NavLink
       to={"/forgot_password"}

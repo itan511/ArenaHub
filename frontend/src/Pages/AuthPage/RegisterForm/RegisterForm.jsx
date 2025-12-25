@@ -1,8 +1,11 @@
 import InputField from "../../../components/InputField/index.js";
 import {useState} from "react";
 import Button from "../../../components/Button/index.js";
+import authService from "../../../api/AuthService.js";
+import {useNavigate} from "react-router-dom";
 
-export default () => {
+export default ({showNotification}) => {
+  const navigate = useNavigate()
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password1: "",
@@ -22,8 +25,23 @@ export default () => {
   }
 
 
-  const register = () => {
-
+  const register = async () => {
+    if (registerForm.email) {
+      if (registerForm.password1 || registerForm.password2) {
+        if (registerForm.password1 === registerForm.password2) {
+          await authService.register({
+            email: registerForm.email,
+            password: registerForm.password2
+          }).then((r) => r ? navigate("/login") : showNotification("Account with this email already exists"));
+        } else {
+          showNotification("Passwords don't match")
+        }
+      } else {
+        showNotification("Password required");
+      }
+    } else {
+      showNotification("Email required");
+    }
   }
 
   return (<>
@@ -40,6 +58,7 @@ export default () => {
       label={"Password"}
       name={"password"}
       placeholder={"Enter your password"}
+      isPassword={true}
     />
     <InputField
       inputValue={registerForm.password2}
@@ -47,6 +66,7 @@ export default () => {
       label={"Repeat password"}
       name={"password"}
       placeholder={"Repeat your password"}
+      isPassword={true}
     />
     <Button
       content={"Sign Up"}
