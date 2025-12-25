@@ -1,14 +1,35 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
-from app.api import auth, tournament, player, match, team
-import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="ArenaHub API")
+from app.api.v1.router import api_router
+from app.core.settings import settings
+from app.db.session import engine
 
-app.include_router(auth.router)
-app.include_router(tournament.router)
-app.include_router(player.router)
-app.include_router(match.router)
-app.include_router(team.router) 
 
-if __name__ == "__main__":
-      uvicorn.run(app, host="0.0.0.0", port=5000, log_level="info")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(lambda _: None)
+    yield
+    await engine.dispose()
+
+
+app = FastAPI(title=settings.APP_NAME, lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/health", tags=["infra"])
+async def health():
+    return {"status": "ok"}
+
+
+app.include_router(api_router)
