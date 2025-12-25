@@ -1,6 +1,6 @@
 import style from './Button.module.css';
 
-const Button = ({
+export default ({
                   onClick,
                   content,
                   type = "button",
@@ -8,14 +8,16 @@ const Button = ({
                   width = "100%",
                   height = "2.2em",
                   fontSize = "1em",
-                  padding = "0"
+                  padding = "0",
+                  disable = false
                 }) => {
   return (<div
     style={{
-      width, height, fontSize, padding
+      width: width, height: height, fontSize: fontSize, padding: padding
     }}
   >
-    < button
+    <button
+      disabled={disable}
       type={type}
       className={`${style.button} ${style[theme]}`}
       onClick={onClick}
@@ -24,5 +26,3 @@ const Button = ({
     </button>
   </div>);
 };
-
-export default Button;
