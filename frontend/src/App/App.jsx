@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import AuthPage from "../Pages/AuthPage";
 import LoginForm from "../Pages/AuthPage/LoginForm/index.js";
 import RegisterForm from "../Pages/AuthPage/RegisterForm/index.js";
@@ -25,6 +25,13 @@ export default () => {
         <Route
           path="register"
           element={<RegisterForm showNotification={showNotification} />}
+        />
+        <Route
+          path="*"
+          element={<Navigate
+            to={"/auth/login"}
+            replace
+          />}
         />
       </Route>
     </Routes>
