@@ -8,6 +8,7 @@ import DashboardPage from "../Pages/DashboardPage/index.js";
 
 export default () => {
   const {notification, showNotification} = useNotification();
+  const [user, setUser] = useState({email: "pupupupu"});
   const navigate = useNavigate();
   return (<>
     <Notification
@@ -15,10 +16,9 @@ export default () => {
       context={notification.text}
     />
     <Routes>
-
       <Route
         path={"/auth/*"}
-        element={<AuthPage navigate={navigate}/>}
+        element={<AuthPage navigate={navigate} />}
       >
         <Route
           path={"login"}
@@ -51,7 +51,10 @@ export default () => {
       />
       <Route
         path={"/dashboard"}
-        element={<DashboardPage navigate={navigate} />}
+        element={<DashboardPage
+          navigate={navigate}
+          user={user}
+        />}
       />
     </Routes>
   </>);

@@ -1,0 +1,16 @@
+.but {
+  position: fixed;
+  right: 2em;
+  bottom: 1.5em;
+  border-radius: 50%;
+  background-color: var(--blue);
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0 ;
+}

@@ -4,10 +4,9 @@ import Header from "../../components/Header/index.js";
 import SearchTitle from "./SearchTitle/index.js";
 import CardTournament from "../../components/CardTournament/index.js";
 import startTournaments from "../../data/tournaments.js";
-import {NavLink} from "react-router-dom";
+import CycleButton from "../../components/CycleButton/index.js";
 
-export default ({navigate}) => {
-  const [user, setUser] = useState({email: "pupupupu"});
+export default ({navigate, user}) => {
   const [search, setSearch] = useState("");
   const [tournaments, setTournaments] = useState(startTournaments);
 
@@ -17,10 +16,10 @@ export default ({navigate}) => {
 
 
   return (<div className={style.dashboard}>
-    <NavLink
-      to={"/tournament/create"}
-      className={style.create}
-    >+</NavLink>
+    <CycleButton
+      onClick={() => navigate("/tournament/create")}
+      content={"+"}
+    />
     <Header
       user={user}
       navigate={navigate}
