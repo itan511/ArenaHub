@@ -1,0 +1,32 @@
+.name {
+  font-size: 1.25em;
+  display: flex;
+  align-items: center;
+}
+
+.description {
+  border-radius: 1em;
+  background-color: var(--white);
+  padding: 1.5em;
+}
+
+.character {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+
+}
+
+.characters {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border-radius: 1em;
+  background-color: var(--white);
+  padding: 1.5em;
+}
+
+.left {
+  opacity: 0.75;
+  font-size: 0.8em;
+}

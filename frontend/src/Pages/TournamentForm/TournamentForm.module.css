@@ -1,0 +1,17 @@
+.tournament {
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 1em 10%;
+}
+
+.gridOverview {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2em;
+  margin-bottom: 4em;
+}

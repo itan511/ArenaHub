@@ -5,6 +5,12 @@ import RegisterForm from "../Pages/AuthPage/RegisterForm/index.js";
 import Notification from "../Notification/Notification.jsx";
 import useNotification from "../hooks/useNotification.js";
 import DashboardPage from "../Pages/DashboardPage/index.js";
+import TournamentForm from "../Pages/TournamentForm/index.js";
+import CreateTournament
+  from "../Pages/TournamentForm/CreateTournament/index.js";
+import IdTournament from "../Pages/TournamentForm/IdTournament/index.js";
+import {useState} from "react";
+import EditTournament from "../Pages/TournamentForm/EditTournament/index.js";
 
 export default () => {
   const {notification, showNotification} = useNotification();
@@ -56,6 +62,26 @@ export default () => {
           user={user}
         />}
       />
+      <Route
+        path={"/tournament/*"}
+        element={<TournamentForm
+          navigate={navigate}
+          user={user}
+        />}
+      >
+        <Route
+          path={"create"}
+          element={<CreateTournament navigate={navigate} />}
+        />
+        <Route
+          path={":id"}
+          element={<IdTournament navigate={navigate} />}
+        />
+        <Route
+          path={"edit/:id"}
+          element={<EditTournament navigate={navigate} />}
+        />
+      </Route>
     </Routes>
   </>);
 };
