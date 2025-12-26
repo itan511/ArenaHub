@@ -30,8 +30,5 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=False)
 
-    class Config:
-        env_file = ".env"
-
 
 settings = Settings()
