@@ -21,11 +21,11 @@ export default ({
     className={style.field}
     style={{width, height}}
   >
-    <label
+    {label && <label
       htmlFor={name}
       className={style.label}
     >{label}
-    </label>
+    </label>}
     <div className={style.area}>
       <input
         type={(isPassword && !isVisible) ? "password" : "text"}
@@ -34,7 +34,6 @@ export default ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        autoComplete={"on"}
       />
       {isPassword && <RenderIcon
         className={style.icon}

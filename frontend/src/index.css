@@ -6,8 +6,11 @@
   --lightGrey: #D1D5DB;
 }
 
-*{
+#root {
+  background-color: var(--dirtyWhite);
+}
+
+* {
   margin: 0;
-  color: var(--grey);
   font-family: 'Roboto', sans-serif;
 }

@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import AuthPage from "../Pages/AuthPage";
 import LoginForm from "../Pages/AuthPage/LoginForm/index.js";
 import RegisterForm from "../Pages/AuthPage/RegisterForm/index.js";
@@ -7,6 +7,7 @@ import useNotification from "../hooks/useNotification.js";
 
 export default () => {
   const {notification, showNotification} = useNotification();
+  const navigate = useNavigate();
   return (<>
     <Notification
       isVisible={notification.isVisible}
@@ -16,18 +17,24 @@ export default () => {
 
       <Route
         path={"/auth/*"}
-        element={<AuthPage />}
+        element={<AuthPage navigate={navigate}/>}
       >
         <Route
-          path="login"
-          element={<LoginForm showNotification={showNotification} />}
+          path={"login"}
+          element={<LoginForm
+            showNotification={showNotification}
+            navigate={navigate}
+          />}
         />
         <Route
-          path="register"
-          element={<RegisterForm showNotification={showNotification} />}
+          path={"register"}
+          element={<RegisterForm
+            showNotification={showNotification}
+            navigate={navigate}
+          />}
         />
         <Route
-          path="*"
+          path={"*"}
           element={<Navigate
             to={"/auth/login"}
             replace

@@ -1,13 +1,12 @@
 import style from './LoginForm.module.css';
 import InputField from "../../../components/InputField/index.js";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useState} from "react";
 import Button from "../../../components/Button/index.js";
 import authService from "../../../api/AuthService.js";
 
-export default ({showNotification}) => {
+export default ({showNotification, navigate}) => {
   const [loginForm, setLoginForm] = useState({email: "", password: ""});
-  const navigate = useNavigate();
 
   const handleEmailInput = (value) => {
     setLoginForm(prevState => ({...prevState, email: value}));

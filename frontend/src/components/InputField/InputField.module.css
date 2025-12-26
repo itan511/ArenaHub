@@ -7,13 +7,14 @@
   flex-direction: column;
   gap: 0.5em;
   min-height: 5em;
+  justify-content: center;
 }
 
 .area {
   display: flex;
   border-radius: 0.5em;
   border: 1px solid var(--lightGrey);
-  background-color: transparent;
+  background-color: var(--white);
   padding: 0.5em;
   align-items: center;
   gap: 0.5em;

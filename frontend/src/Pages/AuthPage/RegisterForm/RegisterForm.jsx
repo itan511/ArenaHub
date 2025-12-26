@@ -2,14 +2,10 @@ import InputField from "../../../components/InputField/index.js";
 import {useState} from "react";
 import Button from "../../../components/Button/index.js";
 import authService from "../../../api/AuthService.js";
-import {useNavigate} from "react-router-dom";
 
-export default ({showNotification}) => {
-  const navigate = useNavigate()
+export default ({showNotification, navigate}) => {
   const [registerForm, setRegisterForm] = useState({
-    email: "",
-    password1: "",
-    password2: ""
+    email: "", password1: "", password2: ""
   })
 
   const handleEmailInput = (value) => {
@@ -30,8 +26,7 @@ export default ({showNotification}) => {
       if (registerForm.password1 || registerForm.password2) {
         if (registerForm.password1 === registerForm.password2) {
           await authService.register({
-            email: registerForm.email,
-            password: registerForm.password2
+            email: registerForm.email, password: registerForm.password2
           }).then((r) => r ? navigate("/login") : showNotification("Account with this email already exists"));
         } else {
           showNotification("Passwords don't match")

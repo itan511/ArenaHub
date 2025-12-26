@@ -1,13 +1,15 @@
 import style from './AuthPage.module.css';
-import {NavLink, Outlet, useNavigate} from "react-router-dom";
+import {
+  NavLink, Outlet, useMatch
+} from "react-router-dom";
 import Logotype from "../../components/Logotype/index.js";
 import Button from "../../components/Button";
 import {useState} from "react";
 
 
-export default () => {
-  const [switcher, setSwitcher] = useState("login")
-  const navigate = useNavigate()
+export default ({navigate}) => {
+  const match = useMatch("/auth/:page");
+  const [switcher, setSwitcher] = useState(match?.params.page)
 
   const mySwitch = () => {
     if (switcher === "login") {
