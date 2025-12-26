@@ -1,0 +1,38 @@
+.card {
+  background-color: var(--white);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 1em;
+  border: 1px solid var(--lightGrey);
+}
+
+.name {
+  font-size: 1.25em;
+}
+
+.character {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.left {
+  opacity: 0.75;
+  font-size: 0.8em;
+}
+
+.delete {
+  transition: 0.2s ease all;
+  width: 2em;
+  height: 2em;
+  color: var(--grey);
+}
+
+.delete:active, .delete:hover {
+  scale: 0.95;
+  color: red;
+}
+
+

@@ -1,0 +1,23 @@
+.titleSearch {
+  margin-top: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.h3 {
+  font-size: 1.5em;
+}
+
+.h6 {
+  font-size: 1.1em;
+  font-weight: 400;
+  opacity: 0.75;
+}

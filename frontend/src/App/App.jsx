@@ -4,6 +4,7 @@ import LoginForm from "../Pages/AuthPage/LoginForm/index.js";
 import RegisterForm from "../Pages/AuthPage/RegisterForm/index.js";
 import Notification from "../Notification/Notification.jsx";
 import useNotification from "../hooks/useNotification.js";
+import DashboardPage from "../Pages/DashboardPage/index.js";
 
 export default () => {
   const {notification, showNotification} = useNotification();
@@ -41,6 +42,17 @@ export default () => {
           />}
         />
       </Route>
+      <Route
+        path={"*"}
+        element={<Navigate
+          to={"/dashboard"}
+          replace
+        />}
+      />
+      <Route
+        path={"/dashboard"}
+        element={<DashboardPage navigate={navigate} />}
+      />
     </Routes>
   </>);
 };

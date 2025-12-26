@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 10%;
+  background-color: var(--white);
+  font-size: 0.75em;
+  border: 1px solid var(--lightGrey);
+}
+
+.pathHeader {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.exit {
+  color: var(--white);
+  position: relative;
+}
+
+.exitSVG {
+  position: absolute;
+  left: -40%;
+  top: 12.5%;
+  color: var(--white);
+}
