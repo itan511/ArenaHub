@@ -5,13 +5,13 @@
 .main {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   gap: 2em;
+  padding: 0 10%;
 }
 
 .grid {
   display: grid;
-  padding: 0 10%;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2em;
   margin-bottom: 4em;
