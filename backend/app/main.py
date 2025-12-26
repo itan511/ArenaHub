@@ -5,13 +5,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.router import api_router
 from app.core.settings import settings
+from app.db.init_db import init_models
 from app.db.session import engine
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    async with engine.begin() as conn:
-        await conn.run_sync(lambda _: None)
+    await init_models(engine=engine, drop=False)
     yield
     await engine.dispose()
 
@@ -32,4 +32,4 @@ async def health():
     return {"status": "ok"}
 
 
-app.include_router(api_router)
+app.include_router(api_router) 
