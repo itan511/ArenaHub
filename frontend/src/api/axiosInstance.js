@@ -1,53 +1,40 @@
-import axios from 'axios';
+import axios from "axios";
+
 const API_URL = "http://localhost:8000/api/v1";
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accessToken');
-    if (token && config.headers) {
+    const token = localStorage.getItem("accessToken");
+
+    if (
+      token &&
+      !config.url.includes("/auth/login") &&
+      !config.url.includes("/auth/register")
+    ) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error),
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-
-    if ((error.response?.status === 401 && !originalRequest._retry) || error.response?.status === 403) {
-      originalRequest._retry = true;
-
-      try {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const response = await axios.post(`${API_URL}/auth/refresh`, {refresh_token: refreshToken});
-
-        const accessToken = response.data.access_token;
-        localStorage.setItem('accessToken', accessToken);
-
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-        return axiosInstance(originalRequest);
-      } catch (refreshError) {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/welcome';
-        return Promise.reject(refreshError);
-      }
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("accessToken");
+      window.location.href = "/welcome";
     }
-
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;

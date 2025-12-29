@@ -1,58 +1,63 @@
-import style from './LoginForm.module.css';
+import style from "./LoginForm.module.css";
 import InputField from "../../../components/InputField/index.js";
-import {NavLink} from "react-router-dom";
-import {useState} from "react";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import Button from "../../../components/Button/index.js";
 import authService from "../../../api/AuthService.js";
 
-export default ({showNotification, navigate}) => {
-  const [loginForm, setLoginForm] = useState({email: "", password: ""});
+export default ({ showNotification, navigate }) => {
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
   const handleEmailInput = (value) => {
-    setLoginForm(prevState => ({...prevState, email: value}));
-  }
+    setLoginForm((prevState) => ({ ...prevState, email: value }));
+  };
 
   const handlePasswordInput = (value) => {
-    setLoginForm(prevState => ({...prevState, password: value}));
-  }
+    setLoginForm((prevState) => ({ ...prevState, password: value }));
+  };
 
   const login = async () => {
     if (loginForm.email) {
       if (loginForm.password) {
-        await authService.login({loginForm}).then((r) => r ? navigate("/") : showNotification("Invalid email or password"));
+        await authService
+          .login({ loginForm })
+          .then((r) =>
+            r ? navigate("/") : showNotification("Invalid email or password"),
+          );
       } else {
         showNotification("Password required");
       }
     } else {
       showNotification("Email required");
     }
-  }
+  };
 
-  return (<>
-    <InputField
-      inputValue={loginForm.email}
-      onChange={handleEmailInput}
-      label={"Email Address"}
-      name={"email"}
-      placeholder={"Enter your email"}
-    />
-    <InputField
-      inputValue={loginForm.password}
-      onChange={handlePasswordInput}
-      label={"Password"}
-      name={"password"}
-      placeholder={"Enter your password"}
-      isPassword={true}
-    />
-    <NavLink
-      to={"/forgot_password"}
-      className={style.forgot}
-    >Forgot password?</NavLink>
-    <Button
-      content={"Sign In"}
-      onClick={login}
-      theme={"blue"}
-      height={"3em"}
-    />
-  </>);
+  return (
+    <>
+      <InputField
+        inputValue={loginForm.email}
+        onChange={handleEmailInput}
+        label={"Email Address"}
+        name={"email"}
+        placeholder={"Enter your email"}
+      />
+      <InputField
+        inputValue={loginForm.password}
+        onChange={handlePasswordInput}
+        label={"Password"}
+        name={"password"}
+        placeholder={"Enter your password"}
+        isPassword={true}
+      />
+      <NavLink to={"/forgot_password"} className={style.forgot}>
+        Forgot password?
+      </NavLink>
+      <Button
+        content={"Sign In"}
+        onClick={login}
+        theme={"blue"}
+        height={"3em"}
+      />
+    </>
+  );
 };

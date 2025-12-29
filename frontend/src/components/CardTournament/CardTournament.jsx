@@ -1,8 +1,12 @@
 import style from './CardTournament.module.css';
 import Button from "../Button/index.js";
 import {RiDeleteBinFill} from "react-icons/ri";
+import tournamentService from '../../api/TournamentService.js';
 
 export default ({tournament, remove, navigate}) => {
+  const removeTournament = async(id)=>{
+    await tournamentService.delete(id);
+  }
   return (<div className={style.card}>
     <h4 className={style.name}>{tournament.name}</h4>
     <h6 className={style.left}>{tournament.start_date} - {tournament.end_date}</h6>
@@ -21,7 +25,7 @@ export default ({tournament, remove, navigate}) => {
         onClick={() => navigate(`/tournament/${tournament.id}`)}
       />
       <RiDeleteBinFill
-        onClick={() => remove(tournament.id)}
+        onClick={() => removeTournament(tournament.id)}
         className={style.delete}
       />
     </div>

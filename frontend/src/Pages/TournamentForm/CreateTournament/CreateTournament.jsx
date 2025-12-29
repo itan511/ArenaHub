@@ -5,6 +5,7 @@ import CycleButton from "../../../components/CycleButton/index.js";
 import {FaCheck} from "react-icons/fa6";
 import InputField from "../../../components/InputField/index.js";
 import Button from "../../../components/Button/index.js";
+import tournamentService from '../../../api/TournamentService.js';
 
 export default ({navigate}) => {
   const [name, setName] = useState("");
@@ -33,8 +34,16 @@ export default ({navigate}) => {
   const handlePrize = (value) => {
     setPrize(value)
   }
-  const createTournament = () => {
-
+  const createTournament = async() => {
+    await tournamentService.create({
+      name,
+      description,
+      format,
+      startDate,
+      endDate,
+      prize
+    });
+    navigate("/");
   }
 
 
