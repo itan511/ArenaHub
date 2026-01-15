@@ -20,6 +20,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("accessToken");
+    window.location.href = "/auth/login";
   }
 
   isAuthenticated() {

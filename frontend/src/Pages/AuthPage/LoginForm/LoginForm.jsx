@@ -17,18 +17,29 @@ export default ({ showNotification, navigate }) => {
   };
 
   const login = async () => {
-    if (loginForm.email) {
-      if (loginForm.password) {
-        await authService
-          .login({ loginForm })
-          .then((r) =>
-            r ? navigate("/") : showNotification("Invalid email or password"),
-          );
-      } else {
-        showNotification("Password required");
-      }
-    } else {
+    if (!loginForm.email) {
       showNotification("Email required");
+      return;
+    }
+
+    if (!loginForm.password) {
+      showNotification("Password required");
+      return;
+    }
+
+    try {
+      const data = await authService.login({
+        email: loginForm.email,
+        password: loginForm.password,
+      });
+
+      if (data?.access_token) {
+        navigate("/");
+      } else {
+        showNotification("Invalid email or password");
+      }
+    } catch (e) {
+      showNotification("Invalid email or password");
     }
   };
 
